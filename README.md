@@ -23,6 +23,5 @@ exclude = clock
 $ python3 sopel-wundertime/wundertime.py alice springs
 Looking up "alice springs"
 Time for Alice Springs, Australia is Sat Feb 10 18:37:32 2018 (ACST)
-$
 ```
 
