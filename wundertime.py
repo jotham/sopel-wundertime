@@ -1,7 +1,6 @@
 from __future__ import print_function
 from datetime import datetime
-import pytz
-import requests
+import pytz, requests
 
 BASE_URL = 'http://autocomplete.wunderground.com/aq?query='
 
