@@ -9,10 +9,16 @@ def find_time_at_location(location):
     query = requests.get(BASE_URL+location).json()
     results = []
     for location in query['RESULTS']:
-        results.append([
-            location['name'],
-            datetime.now(pytz.timezone(location['tz'])).strftime('%c'),
-            location['tzs']
+        try:
+            local_tz = pytz.timezone(location['tz'])
+        except pytz.exceptions.UnknownTimeZoneError:
+            # Couldn't find the location
+            next
+        else:
+            results.append([
+                location['name'],
+                datetime.now(local_tz).strftime('%c'),
+                location['tzs']
             ])
         return results
 
