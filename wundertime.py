@@ -29,14 +29,16 @@ except ImportError:
 else:
     @sopel.module.commands('time')
     @sopel.module.example('.time london')
-    def f_namecheap(bot, trigger):
+    def f_time(bot, trigger):
         """Look up the time name with wunderground"""
-        query = trigger.group(2).strip().lower()
-        results = find_time_at_location(query)
-        if results:
-            bot.say('Time for {} is {} ({})'.format(*results[0]))
-        else:
-            bot.say('Couldn\'t look up time for "{}"'.format(query))
+        if trigger.group(2):
+            query = trigger.group(2).strip().lower()
+            results = find_time_at_location(query)
+            if results:
+                for result in results:
+                    bot.say('Time for {} is {} ({})'.format(*result))
+            else:
+                bot.say('Couldn\'t look up time for "{}"'.format(query))
         return sopel.module.NOLIMIT
 
 if __name__ == '__main__':
@@ -47,6 +49,7 @@ if __name__ == '__main__':
     print('Looking up "{}"'.format(query))
     results = find_time_at_location(query)
     if results:
-        print("Time for {} is {} ({})".format(*results[0]))
+        for result in results:
+            print("Time for {} is {} ({})".format(*result))
     else:
         print('Couldn\'t look up time for "{}"'.format(query))
